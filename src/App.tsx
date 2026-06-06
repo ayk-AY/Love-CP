@@ -8,6 +8,7 @@ import { ManagementActions } from "./components/ManagementActions";
 import { PreviewSheet } from "./components/PreviewSheet";
 import { Toolbar } from "./components/Toolbar";
 import { CpEditor } from "./components/CpEditor";
+import { CreatorNameControl } from "./components/CreatorNameControl";
 import { ThemeSelector } from "./components/ThemeSelector";
 import { useImageUrls } from "./hooks/useImageUrls";
 import { themeConfigs } from "./themes";
@@ -55,6 +56,16 @@ export default function App() {
       settings: {
         ...current.settings,
         themeId
+      }
+    }));
+  }
+
+  function updateCreatorNameSettings(patch: Partial<Pick<SheetState["settings"], "showCreatorName" | "creatorName">>) {
+    setSheetState((current) => ({
+      ...current,
+      settings: {
+        ...current.settings,
+        ...patch
       }
     }));
   }
@@ -259,6 +270,12 @@ export default function App() {
       <main className="layout">
         <section className="workspace" aria-label="操作と編集">
           <Toolbar statusMessage={statusMessage} />
+          <CreatorNameControl
+            enabled={sheetState.settings.showCreatorName}
+            value={sheetState.settings.creatorName}
+            onEnabledChange={(enabled) => updateCreatorNameSettings({ showCreatorName: enabled })}
+            onNameChange={(creatorName) => updateCreatorNameSettings({ creatorName })}
+          />
           <div className="editor-list" aria-label="CP編集フォーム">
             {sheetState.cps.map((entry, index) => (
               <CpEditor

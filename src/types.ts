@@ -47,6 +47,8 @@ export interface CpEntry {
 
 export interface SheetSettings {
   themeId: ThemeId;
+  showCreatorName: boolean;
+  creatorName: string;
 }
 
 export interface SheetState {

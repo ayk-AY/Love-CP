@@ -15,4 +15,11 @@ describe("preview typography styles", () => {
     expect(styles).toMatch(/\.theme-dark-romantic\s+\.sheet-character__attribute\s*{[^}]*background:\s*rgba\(43,\s*29,\s*50,\s*0\.9\)/s);
     expect(styles).toMatch(/\.theme-dark-romantic\s+\.sheet-character__attribute\s*{[^}]*color:\s*#fff4fa/s);
   });
+
+  it("keeps creator byline and split page labels inside the sheet header", () => {
+    expect(styles).toMatch(/\.sheet-title__meta\s*{[^}]*align-items:\s*flex-end/s);
+    expect(styles).toMatch(/\.sheet-title__meta\s*{[^}]*max-width:\s*44%/s);
+    expect(styles).toMatch(/\.sheet-page-label,\s*\.sheet-creator\s*{[^}]*max-width:\s*100%/s);
+    expect(styles).toMatch(/\.sheet-page-label,\s*\.sheet-creator\s*{[^}]*box-sizing:\s*border-box/s);
+  });
 });

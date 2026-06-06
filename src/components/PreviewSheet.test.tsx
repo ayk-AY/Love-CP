@@ -51,4 +51,36 @@ describe("PreviewSheet", () => {
     expect(commentCell).not.toBeNull();
     expect(within(commentCell as HTMLElement).queryByText("コメント")).not.toBeInTheDocument();
   });
+
+  it("shows a creator byline only when the name option is enabled and filled", () => {
+    const state = {
+      ...createInitialState(),
+      settings: {
+        ...createInitialState().settings,
+        showCreatorName: true,
+        creatorName: "お名前/@xxxxxx"
+      },
+      cps: [createCpEntry()]
+    };
+
+    render(<PreviewSheet state={state} imageUrls={{}} />);
+
+    expect(screen.getByText("by お名前/@xxxxxx")).toBeInTheDocument();
+  });
+
+  it("does not show a creator byline when the name option is disabled", () => {
+    const state = {
+      ...createInitialState(),
+      settings: {
+        ...createInitialState().settings,
+        showCreatorName: false,
+        creatorName: "お名前/@xxxxxx"
+      },
+      cps: [createCpEntry()]
+    };
+
+    render(<PreviewSheet state={state} imageUrls={{}} />);
+
+    expect(screen.queryByText("by お名前/@xxxxxx")).not.toBeInTheDocument();
+  });
 });

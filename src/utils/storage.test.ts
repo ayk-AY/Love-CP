@@ -12,6 +12,8 @@ describe("localStorage persistence", () => {
 
     expect(state.cps).toHaveLength(1);
     expect(state.settings.themeId).toBe("simple-white");
+    expect(state.settings.showCreatorName).toBe(false);
+    expect(state.settings.creatorName).toBe("");
   });
 
   it("saves and restores sheet state", () => {
@@ -44,6 +46,23 @@ describe("localStorage persistence", () => {
 
     expect(state.cps[0].relationshipKind).toBe("combo");
     expect(state.cps[0].isReversible).toBe(false);
+  });
+
+  it("repairs creator name settings and keeps legacy states compatible", () => {
+    const state = repairSheetState({
+      version: 1,
+      settings: {
+        themeId: "simple-white",
+        showCreatorName: true,
+        creatorName: "お名前/@xxxxxx"
+      },
+      cps: [],
+      updatedAt: "2026-06-06T00:00:00.000Z"
+    });
+
+    expect(state.settings.showCreatorName).toBe(true);
+    expect(state.settings.creatorName).toBe("お名前/@xxxxxx");
+    expect(state.cps).toHaveLength(1);
   });
 
   it("repairs image crop settings with safe bounds", () => {

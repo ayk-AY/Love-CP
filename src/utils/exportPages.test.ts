@@ -11,11 +11,11 @@ describe("split export pages", () => {
     const pages = createSplitPages(entries, 4);
 
     expect(pages).toHaveLength(3);
-    expect(pages[0].label).toBe("1p目");
+    expect(pages[0].label).toBe("1P目");
     expect(pages[0].entries).toHaveLength(4);
-    expect(pages[1].label).toBe("2p目");
+    expect(pages[1].label).toBe("2P目");
     expect(pages[1].entries).toHaveLength(4);
-    expect(pages[2].label).toBe("3p目");
+    expect(pages[2].label).toBe("3P目");
     expect(pages[2].entries).toHaveLength(1);
   });
 });

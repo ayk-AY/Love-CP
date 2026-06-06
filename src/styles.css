@@ -216,6 +216,35 @@ img {
   align-items: center;
 }
 
+.creator-control {
+  display: grid;
+  gap: 12px;
+  border: 1px solid rgba(94, 73, 84, 0.14);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.72);
+  padding: 14px;
+}
+
+.creator-control__toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #4e4149;
+  font-weight: 900;
+}
+
+.creator-control__toggle input {
+  width: 17px;
+  height: 17px;
+  accent-color: #c6537d;
+}
+
+.creator-control__toggle-text {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
 .editor-list {
   display: grid;
   gap: 12px;
@@ -576,7 +605,7 @@ img {
 
 .sheet-title {
   display: flex;
-  align-items: end;
+  align-items: flex-start;
   justify-content: space-between;
   gap: 20px;
   margin-bottom: 18px;
@@ -590,10 +619,37 @@ img {
 }
 
 .sheet-title p {
+  flex: 1 1 auto;
+  min-width: 0;
   color: var(--sheet-muted);
   font-size: 2rem;
   font-weight: 900;
   line-height: 1.05;
+}
+
+.sheet-title__meta {
+  display: flex;
+  flex: 0 1 auto;
+  min-width: 0;
+  max-width: 44%;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+  text-align: right;
+}
+
+.sheet-page-label,
+.sheet-creator {
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow-wrap: anywhere;
+}
+
+.sheet-creator {
+  color: var(--sheet-heading);
+  font-size: 0.92rem;
+  font-weight: 900;
+  line-height: 1.2;
 }
 
 .sheet-page-label {
@@ -604,6 +660,7 @@ img {
   font-size: 1rem;
   font-weight: 900;
   line-height: 1;
+  white-space: nowrap;
 }
 
 .sheet-rows {

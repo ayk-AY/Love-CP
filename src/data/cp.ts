@@ -44,7 +44,9 @@ export function createInitialState(): SheetState {
   return {
     version: 1,
     settings: {
-      themeId: "simple-white"
+      themeId: "simple-white",
+      showCreatorName: false,
+      creatorName: ""
     },
     cps: [createCpEntry()],
     updatedAt: new Date().toISOString()

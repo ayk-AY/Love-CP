@@ -81,7 +81,9 @@ export function repairSheetState(value: unknown): SheetState {
   return {
     version: 1,
     settings: {
-      themeId: isThemeId(settings.themeId) ? settings.themeId : fallback.settings.themeId
+      themeId: isThemeId(settings.themeId) ? settings.themeId : fallback.settings.themeId,
+      showCreatorName: settings.showCreatorName === true,
+      creatorName: limit(settings.creatorName, 40)
     },
     cps: cps.length > 0 ? cps : fallback.cps,
     updatedAt: asString(value.updatedAt, new Date().toISOString())

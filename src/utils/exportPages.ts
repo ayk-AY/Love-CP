@@ -14,7 +14,7 @@ export function createSplitPages(entries: CpEntry[], pageSize = 4): SplitExportP
     const index = pages.length + 1;
     pages.push({
       index,
-      label: `${index}p目`,
+      label: `${index}P目`,
       entries: entries.slice(start, start + safePageSize)
     });
   }
