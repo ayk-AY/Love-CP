@@ -1,0 +1,93 @@
+import { forwardRef, type CSSProperties } from "react";
+import { getRelationshipOption } from "../data/relationships";
+import { themeConfigs } from "../themes";
+import type { CharacterInfo, CpEntry, SheetState } from "../types";
+import { getReadableTextColor, mixWithWhite, withAlpha } from "../utils/colors";
+import { getImageCropTransform } from "../utils/imageCrop";
+
+interface PreviewSheetProps {
+  state: SheetState;
+  imageUrls: Record<string, string>;
+  pageLabel?: string;
+}
+
+function fallback(value: string, text: string): string {
+  return value.trim() || text;
+}
+
+function characterStyle(character: CharacterInfo) {
+  return {
+    "--accent": character.color,
+    "--accent-soft": mixWithWhite(character.color, 0.84),
+    "--accent-border": withAlpha(character.color, 0.54),
+    "--accent-strong-text": getReadableTextColor(character.color)
+  } as CSSProperties;
+}
+
+function CharacterPreview({ character, label, imageUrl }: { character: CharacterInfo; label: string; imageUrl?: string }) {
+  const imageStyle = {
+    objectPosition: `${character.imagePositionX}% ${character.imagePositionY}%`,
+    transform: getImageCropTransform(character),
+    transformOrigin: "center center"
+  } as CSSProperties;
+
+  return (
+    <div className="sheet-character" style={characterStyle(character)}>
+      <div className={`sheet-character__image ${character.imageShape === "circle" ? "is-circle" : "is-square"}`}>
+        {imageUrl ? <img src={imageUrl} alt={`${label}画像`} style={imageStyle} /> : <span>No Image</span>}
+      </div>
+      <div className="sheet-character__attribute">{fallback(character.attribute, `${label}属性`)}</div>
+      <div className="sheet-character__name">{fallback(character.name, `${label}名`)}</div>
+    </div>
+  );
+}
+
+function CpPreviewRow({ entry, imageUrls }: { entry: CpEntry; imageUrls: Record<string, string> }) {
+  const relationship = getRelationshipOption(entry.relationshipKind);
+
+  return (
+    <article className="sheet-row">
+      <div className="sheet-row__tagline">{fallback(entry.tagline, "おすすめの1文、キャッチコピー")}</div>
+      <div className="sheet-grid">
+        <div className="sheet-work">
+          <span>作品名</span>
+          <strong>{fallback(entry.workTitle, "作品名")}</strong>
+        </div>
+        <CharacterPreview character={entry.seme} label="攻め" imageUrl={entry.seme.imageId ? imageUrls[entry.seme.imageId] : undefined} />
+        <div className="sheet-cross" aria-label={relationship.label}>
+          <span className="sheet-cross__symbol">{relationship.symbol}</span>
+          {entry.relationshipKind === "coupling" && entry.isReversible ? (
+            <span className="sheet-cross__badge">リバ</span>
+          ) : (
+            <span className="sheet-cross__label">{relationship.shortLabel}</span>
+          )}
+        </div>
+        <CharacterPreview character={entry.uke} label="受け" imageUrl={entry.uke.imageId ? imageUrls[entry.uke.imageId] : undefined} />
+        <div className="sheet-comment">
+          <span>コメント</span>
+          <p>{fallback(entry.comment, "好きな関係性やおすすめポイントをここに表示します。")}</p>
+        </div>
+      </div>
+    </article>
+  );
+}
+
+export const PreviewSheet = forwardRef<HTMLDivElement, PreviewSheetProps>(({ state, imageUrls, pageLabel }, ref) => {
+  const theme = themeConfigs[state.settings.themeId];
+
+  return (
+    <div ref={ref} className={`preview-sheet ${theme.className}`}>
+      <div className="sheet-title">
+        <p>好きCP布教シート</p>
+        {pageLabel ? <span className="sheet-page-label">{pageLabel}</span> : null}
+      </div>
+      <div className="sheet-rows">
+        {state.cps.map((entry) => (
+          <CpPreviewRow key={entry.id} entry={entry} imageUrls={imageUrls} />
+        ))}
+      </div>
+    </div>
+  );
+});
+
+PreviewSheet.displayName = "PreviewSheet";
