@@ -36,4 +36,19 @@ describe("PreviewSheet", () => {
     expect(screen.queryByText("攻め属性")).not.toBeInTheDocument();
     expect(screen.queryByText("受け属性")).not.toBeInTheDocument();
   });
+
+  it("shows comment text without a comment label in the finished sheet", () => {
+    const entry = createCpEntry({ comment: "この距離感がたまらなく好きです。" });
+    const state = {
+      ...createInitialState(),
+      cps: [entry]
+    };
+
+    render(<PreviewSheet state={state} imageUrls={{}} />);
+
+    const commentCell = screen.getByText("この距離感がたまらなく好きです。").closest(".sheet-comment");
+
+    expect(commentCell).not.toBeNull();
+    expect(within(commentCell as HTMLElement).queryByText("コメント")).not.toBeInTheDocument();
+  });
 });

@@ -66,7 +66,6 @@ function CpPreviewRow({ entry, imageUrls }: { entry: CpEntry; imageUrls: Record<
         </div>
         <CharacterPreview character={entry.uke} label={ukeLabel} imageUrl={entry.uke.imageId ? imageUrls[entry.uke.imageId] : undefined} />
         <div className="sheet-comment">
-          <span>コメント</span>
           <p>{fallback(entry.comment, "好きな関係性やおすすめポイントをここに表示します。")}</p>
         </div>
       </div>
