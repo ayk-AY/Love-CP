@@ -44,16 +44,18 @@ function CharacterPreview({ character, label, imageUrl }: { character: Character
 
 function CpPreviewRow({ entry, imageUrls }: { entry: CpEntry; imageUrls: Record<string, string> }) {
   const relationship = getRelationshipOption(entry.relationshipKind);
+  const isCombo = entry.relationshipKind === "combo";
+  const semeLabel = isCombo ? "左側" : "攻め";
+  const ukeLabel = isCombo ? "右側" : "受け";
 
   return (
     <article className="sheet-row">
       <div className="sheet-row__tagline">{fallback(entry.tagline, "おすすめの1文、キャッチコピー")}</div>
       <div className="sheet-grid">
         <div className="sheet-work">
-          <span>作品名</span>
-          <strong>{fallback(entry.workTitle, "作品名")}</strong>
+          <strong>{entry.workTitle.trim()}</strong>
         </div>
-        <CharacterPreview character={entry.seme} label="攻め" imageUrl={entry.seme.imageId ? imageUrls[entry.seme.imageId] : undefined} />
+        <CharacterPreview character={entry.seme} label={semeLabel} imageUrl={entry.seme.imageId ? imageUrls[entry.seme.imageId] : undefined} />
         <div className="sheet-cross" aria-label={relationship.label}>
           <span className="sheet-cross__symbol">{relationship.symbol}</span>
           {entry.relationshipKind === "coupling" && entry.isReversible ? (
@@ -62,7 +64,7 @@ function CpPreviewRow({ entry, imageUrls }: { entry: CpEntry; imageUrls: Record<
             <span className="sheet-cross__label">{relationship.shortLabel}</span>
           )}
         </div>
-        <CharacterPreview character={entry.uke} label="受け" imageUrl={entry.uke.imageId ? imageUrls[entry.uke.imageId] : undefined} />
+        <CharacterPreview character={entry.uke} label={ukeLabel} imageUrl={entry.uke.imageId ? imageUrls[entry.uke.imageId] : undefined} />
         <div className="sheet-comment">
           <span>コメント</span>
           <p>{fallback(entry.comment, "好きな関係性やおすすめポイントをここに表示します。")}</p>

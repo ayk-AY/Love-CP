@@ -643,9 +643,9 @@ img {
   align-content: center;
   gap: 12px;
   padding: 18px;
+  text-align: center;
 }
 
-.sheet-work span,
 .sheet-comment span {
   color: var(--sheet-muted);
   font-size: 0.76rem;

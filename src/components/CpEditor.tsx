@@ -46,6 +46,10 @@ export function CpEditor({
     }
   }, [defaultOpen]);
 
+  const isCombo = entry.relationshipKind === "combo";
+  const semeLabel = isCombo ? "左側" : "攻めキャラ";
+  const ukeLabel = isCombo ? "右側" : "受けキャラ";
+
   return (
     <details className="editor-card" open={isOpen} onToggle={(event) => setIsOpen(event.currentTarget.open)}>
       <summary>
@@ -73,13 +77,13 @@ export function CpEditor({
         </div>
 
         <label className="field-label">
-          作品名
+          作品名やCP名
           <input
             type="text"
             maxLength={40}
             value={entry.workTitle}
             onChange={(event) => onUpdate({ workTitle: event.target.value.slice(0, 40) })}
-            placeholder="作品名"
+            placeholder="作品名やCP名"
           />
         </label>
 
@@ -108,7 +112,7 @@ export function CpEditor({
 
         <div className="character-editor-grid">
           <CharacterEditor
-            label="攻めキャラ"
+            label={semeLabel}
             character={entry.seme}
             imageUrl={entry.seme.imageId ? imageUrls[entry.seme.imageId] : undefined}
             onChange={(patch) => updateCharacter("seme", patch)}
@@ -116,7 +120,7 @@ export function CpEditor({
             onImageRemove={() => onImageRemove("seme")}
           />
           <CharacterEditor
-            label="受けキャラ"
+            label={ukeLabel}
             character={entry.uke}
             imageUrl={entry.uke.imageId ? imageUrls[entry.uke.imageId] : undefined}
             onChange={(patch) => updateCharacter("uke", patch)}
