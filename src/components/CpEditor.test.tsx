@@ -28,6 +28,15 @@ describe("CpEditor", () => {
     expect(screen.getByPlaceholderText("作品名やCP名")).toBeInTheDocument();
   });
 
+  it("places the tagline field before the work or CP name field", () => {
+    renderEditor();
+
+    const taglineInput = screen.getByPlaceholderText("例：運命に振り回される二人の、最高に美しい共犯関係");
+    const titleInput = screen.getByPlaceholderText("作品名やCP名");
+
+    expect(taglineInput.compareDocumentPosition(titleInput) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+  });
+
   it("uses left and right labels when the relationship is combo", () => {
     renderEditor(createCpEntry({ relationshipKind: "combo" }));
 

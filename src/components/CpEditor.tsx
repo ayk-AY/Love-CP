@@ -77,17 +77,6 @@ export function CpEditor({
         </div>
 
         <label className="field-label">
-          作品名やCP名
-          <input
-            type="text"
-            maxLength={40}
-            value={entry.workTitle}
-            onChange={(event) => onUpdate({ workTitle: event.target.value.slice(0, 40) })}
-            placeholder="作品名やCP名"
-          />
-        </label>
-
-        <label className="field-label">
           おすすめの1文、キャッチコピー
           <input
             type="text"
@@ -97,6 +86,17 @@ export function CpEditor({
             placeholder="例：運命に振り回される二人の、最高に美しい共犯関係"
           />
           <span className="field-counter">{80 - entry.tagline.length}字</span>
+        </label>
+
+        <label className="field-label">
+          作品名やCP名
+          <input
+            type="text"
+            maxLength={40}
+            value={entry.workTitle}
+            onChange={(event) => onUpdate({ workTitle: event.target.value.slice(0, 40) })}
+            placeholder="作品名やCP名"
+          />
         </label>
 
         <RelationshipEditor
