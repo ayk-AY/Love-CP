@@ -117,12 +117,16 @@ img {
   padding: 14px;
 }
 
-.toolbar__theme {
+.theme-selector {
   display: grid;
   gap: 8px;
+  border: 1px solid rgba(94, 73, 84, 0.12);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.66);
+  padding: 12px;
 }
 
-.toolbar__theme label {
+.theme-selector label {
   display: inline-flex;
   gap: 6px;
   align-items: center;
@@ -130,7 +134,7 @@ img {
   font-weight: 800;
 }
 
-.toolbar__theme select,
+.theme-selector select,
 .field-label input,
 .field-label textarea {
   width: 100%;
@@ -141,13 +145,13 @@ img {
   outline: none;
 }
 
-.toolbar__theme select,
+.theme-selector select,
 .field-label input {
   min-height: 42px;
   padding: 0 12px;
 }
 
-.toolbar__theme p,
+.theme-selector p,
 .autosave-status {
   margin: 0;
   color: #766870;
@@ -285,7 +289,7 @@ img {
 
 .field-label input:focus,
 .field-label textarea:focus,
-.toolbar__theme select:focus {
+.theme-selector select:focus {
   border-color: rgba(198, 83, 125, 0.72);
   box-shadow: 0 0 0 3px rgba(198, 83, 125, 0.13);
 }
@@ -841,6 +845,12 @@ img {
   --cross-text: #d69abb;
 }
 
+.theme-dark-romantic .sheet-character__attribute {
+  border-color: rgba(214, 154, 187, 0.55);
+  background: rgba(43, 29, 50, 0.9);
+  color: #fff4fa;
+}
+
 .theme-simple-white {
   --sheet-bg: #ffffff;
   --sheet-text: #2e3035;
@@ -857,6 +867,198 @@ img {
   --tagline-text: #252a34;
   --cell-rule: 1px solid #e1e4ea;
   --cross-text: #4c5565;
+}
+
+.theme-dreamy-lavender {
+  --sheet-bg: #f7f2ff;
+  --sheet-text: #423855;
+  --sheet-heading: #7657b8;
+  --sheet-muted: #7c6a9e;
+  --sheet-border: 2px solid #cfbdf6;
+  --sheet-radius: 8px;
+  --sheet-title-rule: 2px solid #d8c9fb;
+  --row-bg: #fffaff;
+  --row-border: 2px solid #d8c9fb;
+  --row-radius: 8px;
+  --row-shadow: 0 12px 24px rgba(118, 87, 184, 0.14);
+  --tagline-bg: #e9ddff;
+  --tagline-text: #5d3f9f;
+  --cell-rule: 1px solid #ddd0f8;
+  --cross-text: #8a68ca;
+}
+
+.theme-mint-soda {
+  --sheet-bg: #f0fffb;
+  --sheet-text: #254543;
+  --sheet-heading: #007c76;
+  --sheet-muted: #4b7d79;
+  --sheet-border: 2px solid #80dfd3;
+  --sheet-radius: 8px;
+  --sheet-title-rule: 3px double #7adccf;
+  --row-bg: #ffffff;
+  --row-border: 2px solid #9de7dc;
+  --row-radius: 8px;
+  --row-shadow: 7px 7px 0 #c8f7ef;
+  --tagline-bg: #b9f4ea;
+  --tagline-text: #005d59;
+  --cell-rule: 1px solid #b7ece4;
+  --cross-text: #00a895;
+}
+
+.theme-rose-magazine {
+  --sheet-bg: #fff4f5;
+  --sheet-text: #4a3c43;
+  --sheet-heading: #9b4056;
+  --sheet-muted: #886b72;
+  --sheet-border: 1px solid #d8a6b0;
+  --sheet-radius: 5px;
+  --sheet-title-rule: 1px solid #d8a6b0;
+  --row-bg: #fffdfb;
+  --row-border: 1px solid #e0b7bd;
+  --row-radius: 5px;
+  --row-shadow: 0 8px 20px rgba(155, 64, 86, 0.12);
+  --tagline-bg: #f3d7dc;
+  --tagline-text: #7e2f44;
+  --cell-rule: 1px solid #ead0d4;
+  --cross-text: #ad5368;
+}
+
+.theme-lemon-sherbet {
+  --sheet-bg: #fffce8;
+  --sheet-text: #3e3b2e;
+  --sheet-heading: #8f7114;
+  --sheet-muted: #82794f;
+  --sheet-border: 2px solid #f3d96c;
+  --sheet-radius: 8px;
+  --sheet-title-rule: 2px solid #d4e9ff;
+  --row-bg: #ffffff;
+  --row-border: 2px solid #f3df84;
+  --row-radius: 8px;
+  --row-shadow: 6px 6px 0 #d8efff;
+  --tagline-bg: #fff0a6;
+  --tagline-text: #70560e;
+  --cell-rule: 1px solid #f1e4a5;
+  --cross-text: #2c8dbe;
+}
+
+.theme-forest-antique {
+  --sheet-bg: #f4f7ef;
+  --sheet-text: #303c31;
+  --sheet-heading: #3f633f;
+  --sheet-muted: #697462;
+  --sheet-border: 1px solid #9a8b55;
+  --sheet-radius: 4px;
+  --sheet-title-rule: 1px solid #a79660;
+  --row-bg: #fffdf4;
+  --row-border: 1px solid #b3a36c;
+  --row-radius: 4px;
+  --row-shadow: none;
+  --tagline-bg: #dce8cd;
+  --tagline-text: #294a2d;
+  --cell-rule: 1px solid #d3d7bd;
+  --cross-text: #806c2f;
+}
+
+.theme-monochrome-zine {
+  --sheet-bg: #ffffff;
+  --sheet-text: #151515;
+  --sheet-heading: #000000;
+  --sheet-muted: #555555;
+  --sheet-border: 3px solid #111111;
+  --sheet-radius: 0;
+  --sheet-title-rule: 3px solid #111111;
+  --row-bg: #ffffff;
+  --row-border: 2px solid #111111;
+  --row-radius: 0;
+  --row-shadow: 6px 6px 0 #111111;
+  --tagline-bg: #111111;
+  --tagline-text: #ffffff;
+  --cell-rule: 2px solid #111111;
+  --cross-text: #111111;
+}
+
+.theme-neon-pop {
+  --sheet-bg: #101018;
+  --sheet-text: #f7fbff;
+  --sheet-heading: #71fff2;
+  --sheet-muted: #b8baf8;
+  --sheet-border: 2px solid #ff4fd8;
+  --sheet-radius: 8px;
+  --sheet-title-rule: 2px solid #71fff2;
+  --row-bg: #181827;
+  --row-border: 2px solid #5cf3ff;
+  --row-radius: 8px;
+  --row-shadow: 8px 8px 0 #ff4fd8;
+  --tagline-bg: #ff4fd8;
+  --tagline-text: #101018;
+  --cell-rule: 1px solid #4b4b78;
+  --cross-text: #fff05c;
+}
+
+.theme-neon-pop .sheet-character__attribute {
+  border-color: rgba(113, 255, 242, 0.5);
+  background: rgba(12, 12, 28, 0.86);
+  color: #f7fbff;
+}
+
+.theme-sky-letter {
+  --sheet-bg: #f2fbff;
+  --sheet-text: #2b4154;
+  --sheet-heading: #376f9a;
+  --sheet-muted: #687e91;
+  --sheet-border: 1px solid #9fcce8;
+  --sheet-radius: 6px;
+  --sheet-title-rule: 1px dashed #9fcce8;
+  --row-bg: #ffffff;
+  --row-border: 1px solid #b6d7ea;
+  --row-radius: 6px;
+  --row-shadow: none;
+  --tagline-bg: #d9f0ff;
+  --tagline-text: #255d86;
+  --cell-rule: 1px solid #d4e8f5;
+  --cross-text: #4d8fbd;
+}
+
+.theme-berry-bouquet {
+  --sheet-bg: #fff2f8;
+  --sheet-text: #4a3141;
+  --sheet-heading: #a32963;
+  --sheet-muted: #8a6175;
+  --sheet-border: 2px solid #de98ba;
+  --sheet-radius: 8px;
+  --sheet-title-rule: 2px solid #f0bfd6;
+  --row-bg: #fffdfd;
+  --row-border: 2px solid #efb3cf;
+  --row-radius: 8px;
+  --row-shadow: 0 12px 24px rgba(163, 41, 99, 0.14);
+  --tagline-bg: #ffd6e8;
+  --tagline-text: #8c1f53;
+  --cell-rule: 1px solid #f2c9dc;
+  --cross-text: #be477b;
+}
+
+.theme-twilight-jewel {
+  --sheet-bg: #221b35;
+  --sheet-text: #f6edff;
+  --sheet-heading: #dbc2ff;
+  --sheet-muted: #c7b4d9;
+  --sheet-border: 1px solid #9070c7;
+  --sheet-radius: 7px;
+  --sheet-title-rule: 1px solid #b585d8;
+  --row-bg: #2d2444;
+  --row-border: 1px solid #9070c7;
+  --row-radius: 7px;
+  --row-shadow: 0 10px 26px rgba(0, 0, 0, 0.28);
+  --tagline-bg: #5d397f;
+  --tagline-text: #fff7ff;
+  --cell-rule: 1px solid #57446e;
+  --cross-text: #f4bc70;
+}
+
+.theme-twilight-jewel .sheet-character__attribute {
+  border-color: rgba(244, 188, 112, 0.45);
+  background: rgba(31, 24, 50, 0.86);
+  color: #fff7ff;
 }
 
 .site-footer {

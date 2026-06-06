@@ -1,12 +1,12 @@
 import { render, screen } from "@testing-library/react";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it } from "vitest";
 import { Toolbar } from "./Toolbar";
 
 describe("Toolbar", () => {
-  it("keeps only theme selection and autosave status in the top toolbar", () => {
-    render(<Toolbar themeId="simple-white" statusMessage="入力内容は自動保存されます" onThemeChange={vi.fn()} />);
+  it("keeps only autosave status in the edit toolbar", () => {
+    render(<Toolbar statusMessage="入力内容は自動保存されます" />);
 
-    expect(screen.getByLabelText("デザインテーマ")).toBeInTheDocument();
+    expect(screen.queryByLabelText("デザインテーマ")).not.toBeInTheDocument();
     expect(screen.getByText("入力内容は自動保存されます")).toBeInTheDocument();
     expect(screen.queryByRole("button", { name: /CP追加/ })).not.toBeInTheDocument();
     expect(screen.queryByRole("button", { name: /1枚で保存/ })).not.toBeInTheDocument();

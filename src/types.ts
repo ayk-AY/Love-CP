@@ -3,7 +3,17 @@ export const THEME_IDS = [
   "elegant-classic",
   "pop-candy",
   "dark-romantic",
-  "simple-white"
+  "simple-white",
+  "dreamy-lavender",
+  "mint-soda",
+  "rose-magazine",
+  "lemon-sherbet",
+  "forest-antique",
+  "monochrome-zine",
+  "neon-pop",
+  "sky-letter",
+  "berry-bouquet",
+  "twilight-jewel"
 ] as const;
 
 export const RELATIONSHIP_KINDS = ["coupling", "seme-to-uke", "uke-to-seme", "mutual-pining", "combo"] as const;

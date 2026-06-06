@@ -8,6 +8,7 @@ import { ManagementActions } from "./components/ManagementActions";
 import { PreviewSheet } from "./components/PreviewSheet";
 import { Toolbar } from "./components/Toolbar";
 import { CpEditor } from "./components/CpEditor";
+import { ThemeSelector } from "./components/ThemeSelector";
 import { useImageUrls } from "./hooks/useImageUrls";
 import { themeConfigs } from "./themes";
 import type { CharacterRole, CpEntry, SheetState, ThemeId } from "./types";
@@ -257,11 +258,7 @@ export default function App() {
       <Header />
       <main className="layout">
         <section className="workspace" aria-label="操作と編集">
-          <Toolbar
-            themeId={sheetState.settings.themeId}
-            statusMessage={statusMessage}
-            onThemeChange={updateTheme}
-          />
+          <Toolbar statusMessage={statusMessage} />
           <div className="editor-list" aria-label="CP編集フォーム">
             {sheetState.cps.map((entry, index) => (
               <CpEditor
@@ -302,6 +299,7 @@ export default function App() {
               {isSavingSplit ? "生成中" : "分割保存"}
             </button>
           </div>
+          <ThemeSelector themeId={sheetState.settings.themeId} onThemeChange={updateTheme} />
           <div className="preview-scroll">
             <PreviewSheet ref={previewRef} state={sheetState} imageUrls={imageUrls} />
           </div>

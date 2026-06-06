@@ -10,4 +10,9 @@ describe("preview typography styles", () => {
     expect(styles).toMatch(/\.sheet-character__attribute,\s*\.sheet-character__name\s*{[^}]*overflow-wrap:\s*anywhere/s);
     expect(styles).not.toMatch(/\.sheet-character__attribute\s*{[^}]*word-break:\s*auto-phrase/s);
   });
+
+  it("overrides Dark Romantic character attributes for readable contrast", () => {
+    expect(styles).toMatch(/\.theme-dark-romantic\s+\.sheet-character__attribute\s*{[^}]*background:\s*rgba\(43,\s*29,\s*50,\s*0\.9\)/s);
+    expect(styles).toMatch(/\.theme-dark-romantic\s+\.sheet-character__attribute\s*{[^}]*color:\s*#fff4fa/s);
+  });
 });
