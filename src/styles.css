@@ -693,13 +693,15 @@ img {
 
 .sheet-character__attribute,
 .sheet-character__name {
+  min-width: 0;
+  max-width: 100%;
   min-height: 34px;
   border: 1px solid var(--accent-border);
   border-radius: 8px;
   padding: 7px 9px;
   text-align: center;
   line-break: strict;
-  overflow-wrap: break-word;
+  overflow-wrap: anywhere;
   word-break: normal;
 }
 
@@ -709,7 +711,6 @@ img {
   font-size: 0.9rem;
   font-weight: 800;
   text-wrap: balance;
-  word-break: auto-phrase;
 }
 
 .sheet-character__name {
