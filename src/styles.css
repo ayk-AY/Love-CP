@@ -154,12 +154,6 @@ img {
   font-size: 0.88rem;
 }
 
-.toolbar__actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
 .icon-text-button,
 .icon-button {
   display: inline-flex;
@@ -221,6 +215,12 @@ img {
 .editor-list {
   display: grid;
   gap: 12px;
+}
+
+.add-entry-panel {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 2px;
 }
 
 .editor-card {
@@ -880,6 +880,32 @@ img {
   font-size: 0.92rem;
 }
 
+.management-panel {
+  display: flex;
+  width: min(1080px, calc(100% - 44px));
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 0 auto 16px;
+  border: 1px solid rgba(94, 73, 84, 0.14);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.72);
+  padding: 14px 16px;
+  box-shadow: 0 12px 34px rgba(105, 70, 88, 0.1);
+}
+
+.management-panel h2 {
+  margin: 3px 0 0;
+  font-size: 1rem;
+}
+
+.management-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
 .export-only {
   position: fixed;
   top: 0;
@@ -935,7 +961,7 @@ img {
     width: 132px;
   }
 
-  .toolbar__actions,
+  .management-actions,
   .editor-actions {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -945,9 +971,23 @@ img {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .toolbar__actions .icon-text-button,
+  .management-actions .icon-text-button,
   .editor-actions .icon-text-button {
     width: 100%;
+  }
+
+  .add-entry-panel {
+    justify-content: stretch;
+  }
+
+  .add-entry-panel .icon-text-button {
+    width: 100%;
+  }
+
+  .management-panel {
+    align-items: stretch;
+    flex-direction: column;
+    width: calc(100% - 24px);
   }
 
   .preview-heading {

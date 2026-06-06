@@ -1,9 +1,10 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { toPng } from "html-to-image";
-import { Download } from "lucide-react";
+import { Download, Plus } from "lucide-react";
 import { createCpEntry, createInitialState } from "./data/cp";
 import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
+import { ManagementActions } from "./components/ManagementActions";
 import { PreviewSheet } from "./components/PreviewSheet";
 import { Toolbar } from "./components/Toolbar";
 import { CpEditor } from "./components/CpEditor";
@@ -35,6 +36,7 @@ export default function App() {
   const [isSavingImage, setIsSavingImage] = useState(false);
   const [isSavingSplit, setIsSavingSplit] = useState(false);
   const [statusMessage, setStatusMessage] = useState("入力内容は自動保存されます");
+  const [recentlyAddedEntryId, setRecentlyAddedEntryId] = useState<string | null>(null);
   const previewRef = useRef<HTMLDivElement>(null);
   const splitPreviewRefs = useRef<Array<HTMLDivElement | null>>([]);
   const imageUrls = useImageUrls(sheetState.cps);
@@ -64,10 +66,12 @@ export default function App() {
   }
 
   function addEntry() {
+    const nextEntry = createCpEntry();
     setSheetState((current) => ({
       ...current,
-      cps: [...current.cps, createCpEntry()]
+      cps: [...current.cps, nextEntry]
     }));
+    setRecentlyAddedEntryId(nextEntry.id);
     setStatusMessage("CP行を追加しました");
   }
 
@@ -255,16 +259,8 @@ export default function App() {
         <section className="workspace" aria-label="操作と編集">
           <Toolbar
             themeId={sheetState.settings.themeId}
-            isSavingImage={isSavingImage}
-            isSavingSplit={isSavingSplit}
             statusMessage={statusMessage}
             onThemeChange={updateTheme}
-            onAddEntry={addEntry}
-            onSaveImage={savePreviewImage}
-            onSaveSplitImages={saveSplitImages}
-            onExportJson={exportJson}
-            onImportJson={importJson}
-            onClearAll={clearAllData}
           />
           <div className="editor-list" aria-label="CP編集フォーム">
             {sheetState.cps.map((entry, index) => (
@@ -273,6 +269,7 @@ export default function App() {
                 entry={entry}
                 index={index}
                 total={sheetState.cps.length}
+                defaultOpen={entry.id === recentlyAddedEntryId || (recentlyAddedEntryId === null && index === 0)}
                 imageUrls={imageUrls}
                 onUpdate={(patch) => updateEntry(entry.id, patch)}
                 onDelete={() => deleteEntry(entry.id)}
@@ -281,6 +278,12 @@ export default function App() {
                 onImageRemove={(role) => removeCharacterImage(entry.id, role)}
               />
             ))}
+          </div>
+          <div className="add-entry-panel">
+            <button className="icon-text-button primary" type="button" onClick={addEntry}>
+              <Plus size={18} aria-hidden="true" />
+              CP追加
+            </button>
           </div>
         </section>
 
@@ -317,6 +320,7 @@ export default function App() {
           />
         ))}
       </div>
+      <ManagementActions onExportJson={exportJson} onImportJson={importJson} onClearAll={clearAllData} />
       <Footer />
     </div>
   );

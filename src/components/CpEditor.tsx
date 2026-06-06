@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { ChevronDown, ChevronUp, GripVertical, Trash2 } from "lucide-react";
 import type { CharacterInfo, CharacterRole, CpEntry } from "../types";
 import { CharacterEditor } from "./CharacterEditor";
@@ -7,6 +8,7 @@ interface CpEditorProps {
   entry: CpEntry;
   index: number;
   total: number;
+  defaultOpen: boolean;
   imageUrls: Record<string, string>;
   onUpdate: (patch: Partial<CpEntry>) => void;
   onDelete: () => void;
@@ -19,6 +21,7 @@ export function CpEditor({
   entry,
   index,
   total,
+  defaultOpen,
   imageUrls,
   onUpdate,
   onDelete,
@@ -35,8 +38,16 @@ export function CpEditor({
     });
   }
 
+  const [isOpen, setIsOpen] = useState(defaultOpen);
+
+  useEffect(() => {
+    if (defaultOpen) {
+      setIsOpen(true);
+    }
+  }, [defaultOpen]);
+
   return (
-    <details className="editor-card" open={index === 0}>
+    <details className="editor-card" open={isOpen} onToggle={(event) => setIsOpen(event.currentTarget.open)}>
       <summary>
         <span className="summary-title">
           <GripVertical size={17} aria-hidden="true" />
