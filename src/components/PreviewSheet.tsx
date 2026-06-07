@@ -1,7 +1,7 @@
 import { forwardRef, type CSSProperties } from "react";
 import { getRelationshipOption } from "../data/relationships";
 import { themeConfigs } from "../themes";
-import type { CharacterInfo, CpEntry, SheetState } from "../types";
+import { DEFAULT_SHEET_TITLE, type CharacterInfo, type CpEntry, type SheetState } from "../types";
 import { getReadableTextColor, mixWithWhite, withAlpha } from "../utils/colors";
 import { getImageCropTransform } from "../utils/imageCrop";
 
@@ -75,13 +75,14 @@ function CpPreviewRow({ entry, imageUrls }: { entry: CpEntry; imageUrls: Record<
 
 export const PreviewSheet = forwardRef<HTMLDivElement, PreviewSheetProps>(({ state, imageUrls, pageLabel }, ref) => {
   const theme = themeConfigs[state.settings.themeId];
+  const sheetTitle = state.settings.sheetTitle.trim() || DEFAULT_SHEET_TITLE;
   const creatorName = state.settings.showCreatorName ? state.settings.creatorName.trim() : "";
   const hasTitleMeta = creatorName || pageLabel;
 
   return (
     <div ref={ref} className={`preview-sheet ${theme.className}`}>
       <div className="sheet-title">
-        <p>好きCP布教シート</p>
+        <p>{sheetTitle}</p>
         {hasTitleMeta ? (
           <div className="sheet-title__meta">
             {creatorName ? <span className="sheet-creator">by {creatorName}</span> : null}

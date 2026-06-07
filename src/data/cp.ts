@@ -1,4 +1,4 @@
-import type { CharacterInfo, CharacterRole, CpEntry, SheetState } from "../types";
+import { DEFAULT_SHEET_TITLE, type CharacterInfo, type CharacterRole, type CpEntry, type SheetState } from "../types";
 
 export function makeId(prefix: string): string {
   if (typeof crypto !== "undefined" && "randomUUID" in crypto) {
@@ -45,6 +45,7 @@ export function createInitialState(): SheetState {
     version: 1,
     settings: {
       themeId: "simple-white",
+      sheetTitle: DEFAULT_SHEET_TITLE,
       showCreatorName: false,
       creatorName: ""
     },

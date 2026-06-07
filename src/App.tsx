@@ -8,7 +8,7 @@ import { ManagementActions } from "./components/ManagementActions";
 import { PreviewSheet } from "./components/PreviewSheet";
 import { Toolbar } from "./components/Toolbar";
 import { CpEditor } from "./components/CpEditor";
-import { CreatorNameControl } from "./components/CreatorNameControl";
+import { SheetDisplaySettings } from "./components/SheetDisplaySettings";
 import { ThemeSelector } from "./components/ThemeSelector";
 import { useImageUrls } from "./hooks/useImageUrls";
 import { themeConfigs } from "./themes";
@@ -60,7 +60,7 @@ export default function App() {
     }));
   }
 
-  function updateCreatorNameSettings(patch: Partial<Pick<SheetState["settings"], "showCreatorName" | "creatorName">>) {
+  function updateSheetSettings(patch: Partial<SheetState["settings"]>) {
     setSheetState((current) => ({
       ...current,
       settings: {
@@ -270,11 +270,13 @@ export default function App() {
       <main className="layout">
         <section className="workspace" aria-label="操作と編集">
           <Toolbar statusMessage={statusMessage} />
-          <CreatorNameControl
+          <SheetDisplaySettings
+            sheetTitle={sheetState.settings.sheetTitle}
+            onSheetTitleChange={(sheetTitle) => updateSheetSettings({ sheetTitle })}
             enabled={sheetState.settings.showCreatorName}
             value={sheetState.settings.creatorName}
-            onEnabledChange={(enabled) => updateCreatorNameSettings({ showCreatorName: enabled })}
-            onNameChange={(creatorName) => updateCreatorNameSettings({ creatorName })}
+            onEnabledChange={(enabled) => updateSheetSettings({ showCreatorName: enabled })}
+            onNameChange={(creatorName) => updateSheetSettings({ creatorName })}
           />
           <div className="editor-list" aria-label="CP編集フォーム">
             {sheetState.cps.map((entry, index) => (

@@ -12,6 +12,7 @@ describe("localStorage persistence", () => {
 
     expect(state.cps).toHaveLength(1);
     expect(state.settings.themeId).toBe("simple-white");
+    expect(state.settings.sheetTitle).toBe("好きCP布教シート");
     expect(state.settings.showCreatorName).toBe(false);
     expect(state.settings.creatorName).toBe("");
   });
@@ -20,11 +21,13 @@ describe("localStorage persistence", () => {
     const state = createInitialState();
     state.cps[0].workTitle = "テスト作品";
     state.settings.themeId = "dark-romantic";
+    state.settings.sheetTitle = "推し関係性まとめ";
 
     saveSheetState(state);
 
     expect(loadSheetState().cps[0].workTitle).toBe("テスト作品");
     expect(loadSheetState().settings.themeId).toBe("dark-romantic");
+    expect(loadSheetState().settings.sheetTitle).toBe("推し関係性まとめ");
   });
 
   it("repairs relationship settings and keeps old backups compatible", () => {
@@ -53,6 +56,7 @@ describe("localStorage persistence", () => {
       version: 1,
       settings: {
         themeId: "simple-white",
+        sheetTitle: "推し関係性まとめ",
         showCreatorName: true,
         creatorName: "お名前/@xxxxxx"
       },
@@ -60,9 +64,21 @@ describe("localStorage persistence", () => {
       updatedAt: "2026-06-06T00:00:00.000Z"
     });
 
+    expect(state.settings.sheetTitle).toBe("推し関係性まとめ");
     expect(state.settings.showCreatorName).toBe(true);
     expect(state.settings.creatorName).toBe("お名前/@xxxxxx");
     expect(state.cps).toHaveLength(1);
+  });
+
+  it("repairs legacy states without a sheet title to the default title", () => {
+    const state = repairSheetState({
+      version: 1,
+      settings: { themeId: "simple-white" },
+      cps: [],
+      updatedAt: "2026-06-06T00:00:00.000Z"
+    });
+
+    expect(state.settings.sheetTitle).toBe("好きCP布教シート");
   });
 
   it("repairs image crop settings with safe bounds", () => {

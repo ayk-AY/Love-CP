@@ -82,6 +82,7 @@ export function repairSheetState(value: unknown): SheetState {
     version: 1,
     settings: {
       themeId: isThemeId(settings.themeId) ? settings.themeId : fallback.settings.themeId,
+      sheetTitle: limit(settings.sheetTitle, 40).trim() || fallback.settings.sheetTitle,
       showCreatorName: settings.showCreatorName === true,
       creatorName: limit(settings.creatorName, 40)
     },

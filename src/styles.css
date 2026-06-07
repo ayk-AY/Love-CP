@@ -216,7 +216,7 @@ img {
   align-items: center;
 }
 
-.creator-control {
+.sheet-settings-control {
   display: grid;
   gap: 12px;
   border: 1px solid rgba(94, 73, 84, 0.14);
@@ -225,7 +225,7 @@ img {
   padding: 14px;
 }
 
-.creator-control__toggle {
+.sheet-settings-control__toggle {
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -233,13 +233,14 @@ img {
   font-weight: 900;
 }
 
-.creator-control__toggle input {
+.sheet-settings-control__toggle input {
   width: 17px;
   height: 17px;
   accent-color: #c6537d;
 }
 
-.creator-control__toggle-text {
+.sheet-settings-control__label-text,
+.sheet-settings-control__toggle-text {
   display: inline-flex;
   align-items: center;
   gap: 6px;

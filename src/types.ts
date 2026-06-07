@@ -17,6 +17,7 @@ export const THEME_IDS = [
 ] as const;
 
 export const RELATIONSHIP_KINDS = ["coupling", "seme-to-uke", "uke-to-seme", "mutual-pining", "combo"] as const;
+export const DEFAULT_SHEET_TITLE = "好きCP布教シート";
 
 export type ThemeId = (typeof THEME_IDS)[number];
 export type RelationshipKind = (typeof RELATIONSHIP_KINDS)[number];
@@ -47,6 +48,7 @@ export interface CpEntry {
 
 export interface SheetSettings {
   themeId: ThemeId;
+  sheetTitle: string;
   showCreatorName: boolean;
   creatorName: string;
 }

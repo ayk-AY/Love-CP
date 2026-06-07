@@ -83,4 +83,20 @@ describe("PreviewSheet", () => {
 
     expect(screen.queryByText("by お名前/@xxxxxx")).not.toBeInTheDocument();
   });
+
+  it("renders the configured sheet title in the finished sheet header", () => {
+    const state = {
+      ...createInitialState(),
+      settings: {
+        ...createInitialState().settings,
+        sheetTitle: "推し関係性まとめ"
+      },
+      cps: [createCpEntry()]
+    };
+
+    render(<PreviewSheet state={state} imageUrls={{}} />);
+
+    expect(screen.getByText("推し関係性まとめ")).toBeInTheDocument();
+    expect(screen.queryByText("好きCP布教シート")).not.toBeInTheDocument();
+  });
 });
